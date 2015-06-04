@@ -23,16 +23,29 @@ $APPLICATION->SetTitle("watches");
 	"",
 	Array(
 	)
-);?><?$APPLICATION->IncludeComponent("demo:recomended", "main_page_recommended", Array(
+);?><?$APPLICATION->IncludeComponent(
+	"demo:recomended",
+	"main_page_recommended",
+	Array(
+		"IBLOCK_TYPE" => "watches",
+		"IBLOCKS" => array(0=>"29",),
+		"NEWS_COUNT" => "10",
+		"SORT_BY1" => "ACTIVE_FROM",
+		"SORT_ORDER1" => "DESC",
+		"CACHE_TYPE" => "A",
+		"CACHE_TIME" => "300"
+	)
+);?><br>
+ <?$APPLICATION->IncludeComponent("demo:itemoftheday", "day_item_main_page", Array(
 	"IBLOCK_TYPE" => "watches",	// Тип информационного блока
 		"IBLOCKS" => array(	// Код информационного блока
-			0 => "29",
+			0 => "30",
 		),
-		"NEWS_COUNT" => "10",	// Количество новостей на странице
+		"NEWS_COUNT" => "2",	// Количество новостей на странице
 		"SORT_BY1" => "ACTIVE_FROM",	// Поле для первой сортировки новостей
 		"SORT_ORDER1" => "DESC",	// Направление для первой сортировки новостей
 		"CACHE_TYPE" => "A",	// Тип кеширования
 		"CACHE_TIME" => "300",	// Время кеширования (сек.)
 	),
 	false
-);?><?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>
+);?><br><?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>

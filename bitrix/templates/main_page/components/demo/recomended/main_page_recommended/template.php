@@ -12,7 +12,7 @@
                     <?foreach($arResult["ITEMS"] as $item):?>
                     <a href="<?= $item['DETAIL_PAGE_URL'] ?>" class="slide clone" aria-hidden="true" style="width: 360px; float: left; display: block;">
                             <div class="name">
-                                    <?= $item['PROPERTY_RECOMENDED_ITEM_NAME'] ?>
+                                    <?= $item['PROPERTY_BRAND_VALUE'] ?>
                             </div>
                             <div class="model">
                                     <?= $item['PROPERTY_MODEL_VALUE'] ?>

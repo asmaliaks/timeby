@@ -31,8 +31,8 @@ if($arParams["NEWS_COUNT"]<=0)
 //	$arParams["DETAIL_URL"] = "e-store/watches/#SECTION_ID#/#ELEMENT_ID#/";
 
 
-if($this->StartResultCache(false, $USER->GetGroups()))
-{
+//if($this->StartResultCache(false, $USER->GetGroups()))
+//{
 	if(!CModule::IncludeModule("iblock"))
 	{
 		$this->AbortResultCache();
@@ -119,13 +119,13 @@ if($this->StartResultCache(false, $USER->GetGroups()))
             while($item = $itemAr->GetNext()){
                 $itemRes = $item;
             }
-            
+            $arDiscounts = CCatalogDiscount::GetDiscountByProduct($itemRes['ID'], $USER->GetUserGroupArray(),"N",2,SITE_ID);
             $arItem["DETAIL_PAGE_URL"] = '/e-store'.$itemRes['DETAIL_PAGE_URL'].'/';
             
             $arPrice = CIBlockPriceTools::GetItemPrices($itemRes['IBLOCK_ID'], $pricesAr, $itemRes, false,array(),0, 1);
-            $arItem = array_merge($arItem, $arPrice, $itemRes);
+            $arItem = array_merge($arItem, $arPrice, $itemRes, $arDiscounts);
             $arResult["ITEMS"][]=$arItem;
 	}
 	$this->IncludeComponentTemplate();
-}
+//}
 ?>
