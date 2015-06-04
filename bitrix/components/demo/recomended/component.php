@@ -46,6 +46,12 @@ if($this->StartResultCache(false, $USER->GetGroups()))
 		"NAME",
                 "PROPERTY_RECOMENDED_ITEM",
                 "PROPERTY_RECOMENDED_ITEM.PREVIEW_PICTURE",
+                "PROPERTY_RECOMENDED_ITEM.XML_ID",
+                "PROPERTY_RECOMENDED_ITEM.CODE",
+                "PROPERTY_RECOMENDED_ITEM.IBLOCK_ID",
+                "PROPERTY_RECOMENDED_ITEM.ID",
+                "PROPERTY_RECOMENDED_ITEM.NAME",
+                "PROPERTY_RECOMENDED_ITEM.IBLOCK_SECTION_ID",
                 "SECTION_ID",
 	);
 	$arFilter = array (
@@ -66,11 +72,59 @@ if($this->StartResultCache(false, $USER->GetGroups()))
 	$rsItems = CIBlockElement::GetList($arOrder, $arFilter, false, array("nTopCount"=>$arParams["NEWS_COUNT"]), $arSelect);
 	while($arItem = $rsItems->GetNext())
 	{
-		$arItem["DETAIL_PAGE_URL"] = '/e-store/watches/157/'.$arItem['PROPERTY_RECOMENDED_ITEM_VALUE'].'/';
-                
-                $arItem["PREVIEW_PICTURE"] = CFile::GetPath($arItem["PROPERTY_RECOMENDED_ITEM_PREVIEW_PICTURE"]);
-
-		$arResult["ITEMS"][]=$arItem;
+            
+            $arItem["PREVIEW_PICTURE"] = CFile::GetPath($arItem["PROPERTY_RECOMENDED_ITEM_PREVIEW_PICTURE"]);
+            $pricesAr = CIBlockPriceTools::GetCatalogPrices($arItem['PROPERTY_RECOMENDED_ITEM_IBLOCK_ID'], array('BASE'));
+            $sel = array(
+                "ID",
+                "IBLOCK_ID",
+                "IBLOCK_TYPE",
+                "CODE",
+                "XML_ID",
+                "NAME",
+                "ACTIVE",
+                "DATE_ACTIVE_FROM",
+                "DATE_ACTIVE_TO",
+                "SORT",
+                "PREVIEW_TEXT",
+                "PREVIEW_TEXT_TYPE",
+                "DETAIL_TEXT",
+                "DETAIL_TEXT_TYPE",
+                "DATE_CREATE",
+                "CREATED_BY",
+                "TIMESTAMP_X",
+                "MODIFIED_BY",
+                "TAGS",
+                "IBLOCK_SECTION_ID",
+                "DETAIL_PAGE_URL",
+                "LIST_PAGE_URL",
+                "DETAIL_PICTURE",
+                "PREVIEW_PICTURE",
+                "CATALOG_QUANTITY",
+                "CATALOG_GROUP_1",
+                "PROPERTY_ARTICLE",
+                "PROPERTY_MODEL",
+                "PROPERTY_BRAND",
+                "PROPERTY_NEW_ONE",
+                "PROPERTY_SALE",
+                "PROPERTY_DAY_ITEM",
+            );
+            $filt = array(
+                "ID" => $arItem['PROPERTY_RECOMENDED_ITEM_VALUE'],
+                "IBLOCK_ID" => $arItem["PROPERTY_RECOMENDED_ITEM_IBLOCK_ID"],
+                "ACTIVE" => "Y"
+            );
+            
+            $itemAr = CIBlockElement::GetList(array("CREATED_BY" => "DESC"), $filt, false, array("nTopCount"=>1), $sel);
+            while($item = $itemAr->GetNext()){
+                $itemRes = $item;
+            }
+            
+            $arItem["DETAIL_PAGE_URL"] = '/e-store'.$itemRes['DETAIL_PAGE_URL'].'/';
+            
+            $arPrice = CIBlockPriceTools::GetItemPrices($itemRes['IBLOCK_ID'], $pricesAr, $itemRes, false,array(),0, 1);
+            $arItem = array_merge($arItem, $arPrice, $itemRes);
+            $arResult["ITEMS"][]=$arItem;
 	}
 	$this->IncludeComponentTemplate();
 }
