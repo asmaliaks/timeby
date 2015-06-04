@@ -73,7 +73,7 @@ if($this->StartResultCache(false, $USER->GetGroups()))
 	while($arItem = $rsItems->GetNext())
 	{
             
-            $arItem["PREVIEW_PICTURE"] = CFile::GetPath($arItem["PROPERTY_RECOMENDED_ITEM_PREVIEW_PICTURE"]);
+            $arItem["PREVIEW_PICTURE_SRC"] = CFile::GetPath($arItem["PROPERTY_RECOMENDED_ITEM_PREVIEW_PICTURE"]);
             $pricesAr = CIBlockPriceTools::GetCatalogPrices($arItem['PROPERTY_RECOMENDED_ITEM_IBLOCK_ID'], array('BASE'));
             $sel = array(
                 "ID",

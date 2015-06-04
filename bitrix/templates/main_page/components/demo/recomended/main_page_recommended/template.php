@@ -21,7 +21,7 @@
                                     <?= $item['PROPERTY_ARTICLE_VALUE'] ?>
                             </div>
                             <div class="image">
-                                    <img src="<?= $item["PREVIEW_PICTURE"]?>" alt="" draggable="false">
+                                    <img src="<?= $item["PREVIEW_PICTURE_SRC"]?>" alt="<?= $item['PROPERTY_RECOMENDED_ITEM_NAME'] ?>" draggable="false">
                             </div>
                             <div class="price">
                                     <?= $item['CATALOG_PRICE_1'].' '.$item['CATALOG_GROUP_NAME_1'] ?>
@@ -57,7 +57,7 @@
                             </div>
                             <div class="image">
                                     <a href="<?= $item['DETAIL_PAGE_URL'] ?>">
-                                            <img src="<?= $item["PREVIEW_PICTURE"]?>" alt="<?= $item['PROPERTY_RECOMENDED_ITEM_NAME'] ?>">
+                                            <img src="<?= $item["PREVIEW_PICTURE_SRC"]?>" alt="<?= $item['PROPERTY_RECOMENDED_ITEM_NAME'] ?>">
                                     </a>
                             </div>
                             <div class="price">
