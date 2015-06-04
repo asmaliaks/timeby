@@ -1,9 +1,10 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 $APPLICATION->SetTitle("Тестовый раздел");
-?><?$APPLICATION->IncludeComponent(
-	"demo:chapter.banner",
+?><br>
+<?$APPLICATION->IncludeComponent(
+	"demo:itemoftheday",
 	"",
 	Array(
 	)
-);?><br><?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>
+);?><?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>

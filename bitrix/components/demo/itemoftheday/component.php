@@ -51,7 +51,7 @@ if($arParams["NEWS_COUNT"]<=0)
                 "PROPERTY_ITEM_OF_THE_DAY.ID",
                 "PROPERTY_ITEM_OF_THE_DAY.NAME",
                 "PROPERTY_ITEM_OF_THE_DAY.IBLOCK_SECTION_ID",
-                "SECTION_ID"
+                
 	);
 	$arFilter = array (
 		"IBLOCK_TYPE" => $arParams["IBLOCK_TYPE"],
@@ -103,10 +103,11 @@ if($arParams["NEWS_COUNT"]<=0)
                 "CATALOG_GROUP_1",
                 "PROPERTY_ARTICLE",
                 "PROPERTY_MODEL",
-                "PROPERTY_BRAND",
-                "PROPERTY_NEW_ONE",
-                "PROPERTY_SALE",
-                "PROPERTY_DAY_ITEM",
+                "PROPERTY_BRAND.NAME",
+                "PROPERTY_NEW_ONE_ENUM_ID",
+                "PROPERTY_SALE_ENUM_ID",
+                "PROPERTY_DAY_ITEM_ENUM_ID",
+                "SECTION_ID"
             );
             $filt = array(
                 "ID" => $arItem['PROPERTY_ITEM_OF_THE_DAY_VALUE'],
@@ -119,6 +120,10 @@ if($arParams["NEWS_COUNT"]<=0)
                 $itemRes = $item;
             }
             $arDiscounts = CCatalogDiscount::GetDiscountByProduct($itemRes['ID'], $USER->GetUserGroupArray(),"N",2,SITE_ID);
+            $arItem["PRICE"] = $itemRes["CATALOG_PRICE_1"]*$arDiscounts[0]["VALUE"]/100;
+            $arItem["OLD_PRICE"] = $itemRes["CATALOG_PRICE_1"];
+            $arItem["CURRENT_PRICE"] = $itemRes["CATALOG_PRICE_1"] - $arResult["ITEMS"][$n]["PRICE"];
+            
             $arItem["DETAIL_PAGE_URL"] = '/e-store'.$itemRes['DETAIL_PAGE_URL'].'/';
             
             $arPrice = CIBlockPriceTools::GetItemPrices($itemRes['IBLOCK_ID'], $pricesAr, $itemRes, false,array(),0, 1);

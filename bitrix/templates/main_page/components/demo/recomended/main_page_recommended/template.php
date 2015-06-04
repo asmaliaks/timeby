@@ -24,7 +24,7 @@
                                     <img src="<?= $item["PREVIEW_PICTURE_SRC"]?>" alt="<?= $item['PROPERTY_RECOMENDED_ITEM_NAME'] ?>" draggable="false">
                             </div>
                             <div class="price">
-                                    <?= $item['CATALOG_PRICE_1'].' '.$item['CATALOG_GROUP_NAME_1'] ?>
+                                    <?= $item['CURRENT_PRICE'].' '.$item['CATALOG_GROUP_NAME_1'] ?>
                             </div>
                     </a>
                     <?endforeach;?>

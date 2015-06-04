@@ -13,7 +13,7 @@
             <div class="info">
                 <div class="name">
                         <a href="<?= $item['DETAIL_PAGE_URL'] ?>">
-                            <?= $item["PROPERTY_BRAND_VALUE"] ?>
+                            <?= $item["PROPERTY_BRAND_NAME"] ?>
                         </a>
                 </div>
                 <div class="model">
@@ -23,14 +23,14 @@
                     <?= $item['PROPERTY_ARTICLE_VALUE'] ?>
                 </div>
                 <div class="descr">
-                    <?= $item['PREVIW_TEXT  '] ?>
+                    <?= $item['PREVIEW_TEXT'] ?>
                 </div>
 
                 <div class="bottom">
                         <div class="price">
-                            <?= $item['CATALOG_PRICE_1'].' '.$item['CATALOG_GROUP_NAME_1'] ?>
+                            <?= $item['CURRENT_PRICE'].' '.$item['CATALOG_GROUP_NAME_1'] ?>
                         </div>
-                        <div class="cart">
+                        <div class="cart" onclick="addToCart('<?= $item['ID'] ?>', <?= $item['CURRENT_PRICE'] ?>, <?= $item['CATALOG_PRICE_1'] ?>, '<?= $item["PROPERTY_BRAND_NAME"] ?>')">
                                 в корзину
                                 <div class="icon">
                                 </div>
@@ -42,3 +42,4 @@
     </div>
     <!-- / .body -->
 </div>
+<script src="/bitrix/components/demo/itemoftheday/script.js"></script>
